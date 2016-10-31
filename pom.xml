@@ -15,6 +15,7 @@
 		<module>spring-cloud-starter-stream-source-twitterstream</module>
 		<module>twitterstream-app-starters-common</module>
 		<module>twitterstream-app-dependencies</module>
+		<module>twitterstream-app-starters-test-support</module>
 	</modules>
 
 	<dependencyManagement>

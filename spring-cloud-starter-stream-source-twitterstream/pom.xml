@@ -23,4 +23,32 @@
 			<artifactId>spring-social-twitter</artifactId>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-app-starter-doc-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.cloud.stream.app.plugin</groupId>
+				<artifactId>spring-cloud-stream-app-maven-plugin</artifactId>
+				<configuration>
+					<generatedProjectHome>${session.executionRootDirectory}/apps</generatedProjectHome>
+					<generatedProjectVersion>${project.version}</generatedProjectVersion>
+					<bom>
+						<name>scs-bom</name>
+						<groupId>org.springframework.cloud.stream.app</groupId>
+						<artifactId>twitterstream-app-dependencies</artifactId>
+						<version>${project.version}</version>
+					</bom>
+					<generatedApps>
+						<twitterstream-source>
+							<extraTestConfigClass>org.springframework.cloud.stream.app.test.twitter.TwitterTestConfiguration.class</extraTestConfigClass>
+						</twitterstream-source>
+					</generatedApps>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
