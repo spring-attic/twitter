@@ -1,2 +1,2 @@
-# time
-A time source application starter
+# twitter
+A twitterstream source application starter
