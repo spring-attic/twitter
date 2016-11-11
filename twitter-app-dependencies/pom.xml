@@ -2,10 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>twitterstream-app-dependencies</artifactId>
+    <artifactId>twitter-app-dependencies</artifactId>
     <version>1.1.0.BUILD-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>twitterstream-app-dependencies</name>
+    <name>twitter-app-dependencies</name>
     <description>Spring Cloud Stream TwitterStream App Dependencies</description>
 
     <parent>

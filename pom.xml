@@ -15,7 +15,7 @@
 	<modules>
 		<module>spring-cloud-starter-stream-source-twitterstream</module>
 		<module>twitterstream-app-starters-common</module>
-		<module>twitterstream-app-dependencies</module>
+		<module>twitter-app-dependencies</module>
 		<module>twitterstream-app-starters-test-support</module>
 	</modules>
 
@@ -23,7 +23,7 @@
 		<dependencies>
 			<dependency>
 				<groupId>org.springframework.cloud.stream.app</groupId>
-				<artifactId>twitterstream-app-dependencies</artifactId>
+				<artifactId>twitter-app-dependencies</artifactId>
 				<version>1.1.0.BUILD-SNAPSHOT</version>
 				<type>pom</type>
 				<scope>import</scope>

@@ -39,7 +39,7 @@
 					<bom>
 						<name>scs-bom</name>
 						<groupId>org.springframework.cloud.stream.app</groupId>
-						<artifactId>twitterstream-app-dependencies</artifactId>
+						<artifactId>twitter-app-dependencies</artifactId>
 						<version>${project.version}</version>
 					</bom>
 					<generatedApps>
