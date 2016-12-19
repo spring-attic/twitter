@@ -1,2 +1,5 @@
-# twitter
-A twitterstream source application starter
+# TwitterStream Source
+
+To learn more about this application and the supported properties, please review the following link.
+
+include::spring-cloud-starter-stream-source-twitterstream/README.adoc[]
