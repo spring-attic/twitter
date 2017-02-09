@@ -16,16 +16,20 @@
 
 package org.springframework.cloud.stream.app.twitterstream.source;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.net.URI;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.test.IntegrationTest;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.boot.test.WebIntegrationTest;
-import org.springframework.cloud.stream.app.twitterstream.source.TwitterSourceIntegrationTests.TestTwitterSourceApplication;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.cloud.stream.test.binder.MessageCollector;
 import org.springframework.context.annotation.Bean;
@@ -39,16 +43,15 @@ import org.springframework.web.client.RequestCallback;
 import org.springframework.web.client.ResponseExtractor;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.net.URI;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicReference;
-
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Tests for twitter stream source app.
@@ -57,9 +60,8 @@ import static org.mockito.Mockito.*;
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = TestTwitterSourceApplication.class)
-@WebIntegrationTest(randomPort = true)
 @DirtiesContext
+@SpringBootTest
 public abstract class TwitterSourceIntegrationTests {
 
 	@Autowired
@@ -83,7 +85,7 @@ public abstract class TwitterSourceIntegrationTests {
 
 	}
 
-	@IntegrationTest({ "twitter.stream.streamType=FIREHOSE", "twitter.stream.language=english" })
+	@SpringBootTest({ "twitter.stream.streamType=FIREHOSE", "twitter.stream.language=english" })
 	public static class FireHoseTests extends TwitterSourceIntegrationTests {
 
 		@Test
