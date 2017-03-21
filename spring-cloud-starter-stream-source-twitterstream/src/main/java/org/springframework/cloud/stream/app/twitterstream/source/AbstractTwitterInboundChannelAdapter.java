@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2016 the original author or authors.
+ * Copyright 2014-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,6 +49,7 @@ import org.springframework.web.client.RestTemplate;
  *
  * @author David Turanski
  * @author Gary Russell
+ * @author Artem Bilan
  */
 //TODO: Move this class to a common twitter support subproject
 public abstract class AbstractTwitterInboundChannelAdapter extends MessageProducerSupport {
@@ -151,14 +152,14 @@ public abstract class AbstractTwitterInboundChannelAdapter extends MessageProduc
 				}
 				catch (HttpStatusCodeException sce) {
 					if (sce.getStatusCode() == HttpStatus.UNAUTHORIZED) {
-						logger.error("Twitter authentication failed: " + sce.getMessage());
+						logger.error("Twitter authentication failed: " + sce.getMessage(), sce);
 						running.set(false);
 					}
-					else if (sce.getStatusCode() == HttpStatus.TOO_MANY_REQUESTS) {
-						waitRateLimitBackoff();
+					else if (420 == sce.getStatusCode().value()) {
+						waitRateLimitBackoff(sce);
 					}
 					else {
-						waitHttpErrorBackoff();
+						waitHttpErrorBackoff(sce);
 					}
 				}
 				catch (Exception e) {
@@ -227,16 +228,16 @@ public abstract class AbstractTwitterInboundChannelAdapter extends MessageProduc
 		}
 	}
 
-	private void waitRateLimitBackoff() {
+	private void waitRateLimitBackoff(HttpStatusCodeException sce) {
 		int millis = rateLimitBackOff.get();
-		logger.warn("Rate limit error, waiting for " + millis / 1000 + " seconds before restarting");
+		logger.warn("Rate limit error, waiting for " + millis / 1000 + " seconds before restarting", sce);
 		wait(millis);
 		rateLimitBackOff.set(millis * 2);
 	}
 
-	private void waitHttpErrorBackoff() {
+	private void waitHttpErrorBackoff(HttpStatusCodeException sce) {
 		int millis = httpErrorBackOff.get();
-		logger.warn("Http error, waiting for " + millis / 1000 + " seconds before restarting");
+		logger.warn("Http error, waiting for " + millis / 1000 + " seconds before restarting", sce);
 		wait(millis);
 		if (millis < 320000) {
 			httpErrorBackOff.set(millis * 2);
