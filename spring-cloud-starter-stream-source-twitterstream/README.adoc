@@ -5,6 +5,20 @@ This source ingests data from Twitter's https://dev.twitter.com/docs/streaming-a
 
 You need to supply all keys and secrets (both consumer and accessToken) to authenticate for this source, so it is easiest if you just add these as the following environment variables: CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN and ACCESS_TOKEN_SECRET.
 
+== Input
+
+N/A
+
+== Output
+
+=== Headers
+
+* `Content-Type: text/plain`
+
+=== Payload
+
+* `String`
+
 == Options
 
 The **$$twitterstream$$** $$source$$ has the following options:
@@ -24,6 +38,19 @@ NOTE: `twitterstream` emit JSON in the https://dev.twitter.com/docs/platform-obj
 == Build
 
 ```
-$ mvn clean package
+$ ./mvnw clean install -PgenerateApps
+$ cd apps
+```
+You can find the corresponding binder based projects here.
+You can then cd into one one of the folders and build it:
+```
+$ ./mvnw clean package
+```
+
+== Examples
+
+```
+java -jar twitter_stream_source.jar --consumerKey=<CONSUMER_KEY> --consumerSecret=<CONSUMER_SECRET> \
+    --accessToken=<ACCESS_TOKEN> --accessTokenSecret=<ACCESS_TOKEN_SECRET>
 ```
 
