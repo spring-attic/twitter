@@ -34,7 +34,6 @@ $$twitter.stream.stream-type$$:: $$Twitter stream type (such as sample, firehose
 
 NOTE: `twitterstream` emit JSON in the https://dev.twitter.com/docs/platform-objects/tweets[native Twitter format].
 
-//end::ref-doc[]
 == Build
 
 ```
@@ -54,3 +53,4 @@ java -jar twitter_stream_source.jar --consumerKey=<CONSUMER_KEY> --consumerSecre
     --accessToken=<ACCESS_TOKEN> --accessTokenSecret=<ACCESS_TOKEN_SECRET>
 ```
 
+//end::ref-doc[]
