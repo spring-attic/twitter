@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2016 the original author or authors.
+ * Copyright 2015-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,10 +23,11 @@ import org.springframework.social.twitter.api.impl.TwitterTemplate;
 import org.springframework.util.StringUtils;
 
 /**
- *  {@link org.springframework.integration.core.MessageProducer} implementation to send Twitter stream messages.
+ * {@link org.springframework.integration.core.MessageProducer} implementation to send Twitter stream messages.
  *
  * @author Ilayaperumal Gopinathan
  * @author Gary Russell
+ * @author Nicolas Byl
  */
 class TwitterStreamMessageProducer extends AbstractTwitterInboundChannelAdapter {
 
@@ -41,14 +42,31 @@ class TwitterStreamMessageProducer extends AbstractTwitterInboundChannelAdapter 
 
 	@Override
 	protected URI buildUri() {
-		String path = this.twitterStreamProperties.getStreamType().equals(TwitterStreamType.FIREHOSE) ?
-				"firehose.json" : "sample.json";
-		URIBuilder b = URIBuilder.fromUri(API_URL_BASE + path);
+		TwitterStreamType streamType = this.twitterStreamProperties.getStreamType();
+		URIBuilder b = URIBuilder.fromUri(API_URL_BASE + streamType.getPath());
 		//TODO: Support all the available properties
-		if (StringUtils.hasText(this.twitterStreamProperties.getLanguage())) {
-			b.queryParam("language", this.twitterStreamProperties.getLanguage());
+		if (streamType == TwitterStreamType.FILTER) {
+			if (StringUtils.hasText(this.twitterStreamProperties.getFollow())) {
+				b.queryParam("follow", this.twitterStreamProperties.getFollow());
+			}
+
+			if (StringUtils.hasText(this.twitterStreamProperties.getTrack())) {
+				b.queryParam("track", this.twitterStreamProperties.getTrack());
+			}
+
+			if (StringUtils.hasText(this.twitterStreamProperties.getLocations())) {
+				b.queryParam("locations", this.twitterStreamProperties.getLocations());
+			}
 		}
-		return b.build();
+		else {
+			if (StringUtils.hasText(this.twitterStreamProperties.getLanguage())) {
+				b.queryParam("language", this.twitterStreamProperties.getLanguage());
+			}
+		}
+
+		URI uri = b.build();
+		logger.info("Using twitter stream url: " + uri);
+		return uri;
 	}
 
 	@Override

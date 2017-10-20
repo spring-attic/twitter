@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2016 the original author or authors.
+ * Copyright 2015-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,10 +19,11 @@ package org.springframework.cloud.stream.app.twitterstream.source;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * Configuration properties for Twitterstream source.
+ * Configuration properties for TwitterStream source.
  *
  * @author Ilayaperumal Gopinathan
  * @author Gary Russell
+ * @author Nicolas Byl
  */
 @ConfigurationProperties("twitter.stream")
 public class TwitterStreamProperties {
@@ -36,6 +37,21 @@ public class TwitterStreamProperties {
 	 * The language of the tweet text.
 	 */
 	private String language;
+
+	/**
+	 * A comma separated list of user IDs, indicating the users to return statuses for in the stream.
+	 */
+	private String follow;
+
+	/**
+	 * Keywords to track.
+	 */
+	private String track;
+
+	/**
+	 * A set of bounding boxes to track.
+	 */
+	private String locations;
 
 	public TwitterStreamType getStreamType() {
 		return this.streamType;
@@ -52,4 +68,29 @@ public class TwitterStreamProperties {
 	public void setLanguage(String language) {
 		this.language = language;
 	}
+
+	public String getFollow() {
+		return this.follow;
+	}
+
+	public void setFollow(String follow) {
+		this.follow = follow;
+	}
+
+	public String getTrack() {
+		return this.track;
+	}
+
+	public void setTrack(String track) {
+		this.track = track;
+	}
+
+	public String getLocations() {
+		return this.locations;
+	}
+
+	public void setLocations(String locations) {
+		this.locations = locations;
+	}
+
 }
