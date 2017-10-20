@@ -41,9 +41,8 @@ class TwitterStreamMessageProducer extends AbstractTwitterInboundChannelAdapter 
 
 	@Override
 	protected URI buildUri() {
-		String path = this.twitterStreamProperties.getStreamType().equals(TwitterStreamType.FIREHOSE) ?
-				"firehose.json" : "sample.json";
-		URIBuilder b = URIBuilder.fromUri(API_URL_BASE + path);
+		TwitterStreamType streamType = this.twitterStreamProperties.getStreamType();
+		URIBuilder b = URIBuilder.fromUri(API_URL_BASE + streamType.getPath());
 		//TODO: Support all the available properties
 		if (StringUtils.hasText(this.twitterStreamProperties.getLanguage())) {
 			b.queryParam("language", this.twitterStreamProperties.getLanguage());
