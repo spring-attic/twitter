@@ -24,7 +24,7 @@ package org.springframework.cloud.stream.app.twitterstream.source;
 public enum TwitterStreamType {
 
     //TODO: Support more stream types such as `filter`, `search` that TwitterTemplate implementation supports.
-    SAMPLE("sample.json"), FIREHOSE("firehose.json");
+    SAMPLE("sample.json"), FIREHOSE("firehose.json"), FILTER("filter.json");
 
     private final String path;
 
