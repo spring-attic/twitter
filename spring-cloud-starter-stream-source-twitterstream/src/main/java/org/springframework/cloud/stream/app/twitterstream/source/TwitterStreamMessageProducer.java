@@ -61,7 +61,10 @@ class TwitterStreamMessageProducer extends AbstractTwitterInboundChannelAdapter 
                 b.queryParam("language", this.twitterStreamProperties.getLanguage());
             }
         }
-        return b.build();
+
+        URI uri = b.build();
+        logger.info("Using twitter stream url: " + uri);
+        return uri;
     }
 
     @Override
