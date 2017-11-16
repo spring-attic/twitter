@@ -37,6 +37,21 @@ public class TwitterStreamProperties {
 	 */
 	private String language;
 
+	/**
+	 * A comma separated list of user IDs, indicating the users to return statuses for in the stream.
+	 */
+	private String follow;
+
+	/**
+	 * Keywords to track.
+	 */
+	private String track;
+
+	/**
+	 * A set of bounding boxes to track.
+	 */
+	private String locations;
+
 	public TwitterStreamType getStreamType() {
 		return this.streamType;
 	}
@@ -51,5 +66,29 @@ public class TwitterStreamProperties {
 
 	public void setLanguage(String language) {
 		this.language = language;
+	}
+
+	public String getFollow() {
+		return follow;
+	}
+
+	public void setFollow(String follow) {
+		this.follow = follow;
+	}
+
+	public String getTrack() {
+		return track;
+	}
+
+	public void setTrack(String track) {
+		this.track = track;
+	}
+
+	public String getLocations() {
+		return locations;
+	}
+
+	public void setLocations(String locations) {
+		this.locations = locations;
 	}
 }

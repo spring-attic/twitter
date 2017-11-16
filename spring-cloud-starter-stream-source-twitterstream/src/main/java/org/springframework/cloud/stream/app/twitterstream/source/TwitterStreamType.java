@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2016 the original author or authors.
+ * Copyright 2015-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,17 @@ package org.springframework.cloud.stream.app.twitterstream.source;
  * @author Gary Russell
  */
 public enum TwitterStreamType {
+
 	//TODO: Support more stream types such as `filter`, `search` that TwitterTemplate implementation supports.
-	SAMPLE, FIREHOSE
+	SAMPLE("sample.json"), FIREHOSE("firehose.json"), FILTER("filter.json");
+
+	private final String path;
+
+	private TwitterStreamType(String path) {
+		this.path = path;
+	}
+
+	public String getPath() {
+		return path;
+	}
 }
