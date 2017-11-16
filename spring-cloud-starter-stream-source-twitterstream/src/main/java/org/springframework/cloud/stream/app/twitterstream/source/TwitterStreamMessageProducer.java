@@ -56,7 +56,8 @@ class TwitterStreamMessageProducer extends AbstractTwitterInboundChannelAdapter 
 			if (StringUtils.hasText(this.twitterStreamProperties.getLocations())) {
 				b.queryParam("locations", this.twitterStreamProperties.getLocations());
 			}
-		} else {
+		}
+		else {
 			if (StringUtils.hasText(this.twitterStreamProperties.getLanguage())) {
 				b.queryParam("language", this.twitterStreamProperties.getLanguage());
 			}
@@ -71,11 +72,14 @@ class TwitterStreamMessageProducer extends AbstractTwitterInboundChannelAdapter 
 	protected void doSendLine(String line) {
 		if (line.startsWith("{\"limit")) {
 			logger.info("Twitter stream is being track limited.");
-		} else if (line.startsWith("{\"delete")) {
+		}
+		else if (line.startsWith("{\"delete")) {
 			// discard
-		} else if (line.startsWith("{\"warning")) {
+		}
+		else if (line.startsWith("{\"warning")) {
 			// discard
-		} else {
+		}
+		else {
 			sendMessage(org.springframework.integration.support.MessageBuilder.withPayload(line).build());
 		}
 	}
