@@ -28,11 +28,11 @@ $$twitter.credentials.access-token$$:: $$Access token$$ *($$String$$, default: `
 $$twitter.credentials.access-token-secret$$:: $$Access token secret$$ *($$String$$, default: `$$<none>$$`)*
 $$twitter.credentials.consumer-key$$:: $$Consumer key$$ *($$String$$, default: `$$<none>$$`)*
 $$twitter.credentials.consumer-secret$$:: $$Consumer secret$$ *($$String$$, default: `$$<none>$$`)*
-$$twitter.stream.follow$$:: $$A comma separated list of user IDs, indicating the users to return statuses for in the stream.$$ *($$String$$, default: `$$<none>$$`)*
+$$twitter.stream.filter.follow$$:: $$A comma separated list of user IDs, indicating the users to return statuses for in the stream.$$ *($$String$$, default: `$$<none>$$`)*
+$$twitter.stream.filter.locations$$:: $$A set of bounding boxes to track.$$ *($$String$$, default: `$$<none>$$`)*
+$$twitter.stream.filter.stream-type$$:: $$Twitter stream type (such as sample, firehose). Default is sample.$$ *($$TwitterStreamType$$, default: `$$<none>$$`, possible values: `SAMPLE`,`FIREHOSE`,`FILTER`)*
+$$twitter.stream.filter.track$$:: $$Keywords to track.$$ *($$String$$, default: `$$<none>$$`)*
 $$twitter.stream.language$$:: $$The language of the tweet text.$$ *($$String$$, default: `$$<none>$$`)*
-$$twitter.stream.locations$$:: $$A set of bounding boxes to track.$$ *($$String$$, default: `$$<none>$$`)*
-$$twitter.stream.stream-type$$:: $$Twitter stream type (such as sample, firehose). Default is sample.$$ *($$TwitterStreamType$$, default: `$$<none>$$`, possible values: `SAMPLE`,`FIREHOSE`,`FILTER`)*
-$$twitter.stream.track$$:: $$Keywords to track.$$ *($$String$$, default: `$$<none>$$`)*
 //end::configuration-properties[]
 
 NOTE: `twitterstream` emit JSON in the https://dev.twitter.com/docs/platform-objects/tweets[native Twitter format].
