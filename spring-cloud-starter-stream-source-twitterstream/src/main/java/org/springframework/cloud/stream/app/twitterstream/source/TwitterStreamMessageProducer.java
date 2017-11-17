@@ -16,11 +16,11 @@
 
 package org.springframework.cloud.stream.app.twitterstream.source;
 
-import java.net.URI;
-
 import org.springframework.social.support.URIBuilder;
 import org.springframework.social.twitter.api.impl.TwitterTemplate;
 import org.springframework.util.StringUtils;
+
+import java.net.URI;
 
 /**
  * {@link org.springframework.integration.core.MessageProducer} implementation to send Twitter stream messages.
@@ -58,10 +58,9 @@ class TwitterStreamMessageProducer extends AbstractTwitterInboundChannelAdapter 
 				b.queryParam("locations", this.twitterStreamProperties.getLocations());
 			}
 		}
-		else {
-			if (StringUtils.hasText(this.twitterStreamProperties.getLanguage())) {
-				b.queryParam("language", this.twitterStreamProperties.getLanguage());
-			}
+
+		if (StringUtils.hasText(this.twitterStreamProperties.getLanguage())) {
+			b.queryParam("language", this.twitterStreamProperties.getLanguage());
 		}
 
 		URI uri = b.build();
