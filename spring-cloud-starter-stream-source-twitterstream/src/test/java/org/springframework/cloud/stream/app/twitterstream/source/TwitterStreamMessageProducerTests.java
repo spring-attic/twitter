@@ -16,14 +16,13 @@
 
 package org.springframework.cloud.stream.app.twitterstream.source;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+import org.springframework.social.twitter.api.impl.TwitterTemplate;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import org.junit.Test;
-
-import org.springframework.social.twitter.api.impl.TwitterTemplate;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Nicolas Byl
