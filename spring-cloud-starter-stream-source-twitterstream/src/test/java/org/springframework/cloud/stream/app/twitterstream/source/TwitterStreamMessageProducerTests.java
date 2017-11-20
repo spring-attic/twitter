@@ -16,14 +16,13 @@
 
 package org.springframework.cloud.stream.app.twitterstream.source;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+import org.springframework.social.twitter.api.impl.TwitterTemplate;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import org.junit.Test;
-
-import org.springframework.social.twitter.api.impl.TwitterTemplate;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Nicolas Byl
@@ -38,16 +37,6 @@ public class TwitterStreamMessageProducerTests {
 
 		TwitterStreamMessageProducer producer = new TwitterStreamMessageProducer(new TwitterTemplate(""), properties);
 		assertEquals(new URI("https://stream.twitter.com/1.1/statuses/sample.json?language=english"), producer.buildUri());
-	}
-
-	@Test
-	public void languageIsIgnoredOnFilter() throws URISyntaxException {
-		TwitterStreamProperties properties = new TwitterStreamProperties();
-		properties.setStreamType(TwitterStreamType.FILTER);
-		properties.setLanguage("english");
-
-		TwitterStreamMessageProducer producer = new TwitterStreamMessageProducer(new TwitterTemplate(""), properties);
-		assertEquals(new URI("https://stream.twitter.com/1.1/statuses/filter.json"), producer.buildUri());
 	}
 
 	@Test
