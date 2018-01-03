@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.springframework.cloud.stream.app</groupId>
     <artifactId>twitter-app-dependencies</artifactId>
-    <version>1.3.1.BUILD-SNAPSHOT</version>
+    <version>1.3.1.RELEASE</version>
     <packaging>pom</packaging>
     <name>twitter-app-dependencies</name>
     <description>Spring Cloud Stream TwitterStream App Dependencies</description>
@@ -20,17 +20,17 @@
             <dependency>
                 <groupId>org.springframework.cloud.stream.app</groupId>
                 <artifactId>spring-cloud-starter-stream-source-twitterstream</artifactId>
-                <version>1.3.1.BUILD-SNAPSHOT</version>
+                <version>1.3.1.RELEASE</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud.stream.app</groupId>
                 <artifactId>twitterstream-app-starters-common</artifactId>
-                <version>1.3.1.BUILD-SNAPSHOT</version>
+                <version>1.3.1.RELEASE</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud.stream.app</groupId>
                 <artifactId>twitterstream-app-starters-test-support</artifactId>
-                <version>1.3.1.BUILD-SNAPSHOT</version>
+                <version>1.3.1.RELEASE</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
