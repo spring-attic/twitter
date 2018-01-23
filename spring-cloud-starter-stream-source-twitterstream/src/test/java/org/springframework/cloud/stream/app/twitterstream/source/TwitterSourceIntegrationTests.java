@@ -118,8 +118,8 @@ public abstract class TwitterSourceIntegrationTests {
 
 				@Override
 				public Void answer(InvocationOnMock invocation) throws Throwable {
-					uri().set(invocation.getArgumentAt(0, URI.class));
-					ResponseExtractor<?> extractor = invocation.getArgumentAt(3, ResponseExtractor.class);
+					uri().set(invocation.getArgument(0));
+					ResponseExtractor<?> extractor = invocation.getArgument(3);
 					extractor.extractData(response);
 					return null;
 				}

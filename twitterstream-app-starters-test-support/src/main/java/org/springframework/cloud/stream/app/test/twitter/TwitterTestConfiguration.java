@@ -65,7 +65,7 @@ public class TwitterTestConfiguration {
 
 			@Override
 			public Void answer(InvocationOnMock invocation) throws Throwable {
-				ResponseExtractor<?> extractor = invocation.getArgumentAt(3, ResponseExtractor.class);
+				ResponseExtractor<?> extractor = invocation.getArgument(3);
 				extractor.extractData(response);
 				return null;
 			}
