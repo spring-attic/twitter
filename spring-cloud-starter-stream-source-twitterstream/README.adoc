@@ -52,8 +52,8 @@ $ ./mvnw clean package
 == Examples
 
 ```
-java -jar twitter_stream_source.jar --consumerKey=<CONSUMER_KEY> --consumerSecret=<CONSUMER_SECRET> \
-    --accessToken=<ACCESS_TOKEN> --accessTokenSecret=<ACCESS_TOKEN_SECRET>
+java -jar twitter_stream_source.jar --twitter.credentials.consumerKey=<CONSUMER_KEY> --twitter.credentials.consumerSecret=<CONSUMER_SECRET> \
+    --twitter.credentials.accessToken=<ACCESS_TOKEN> --twitter.credentials.accessTokenSecret=<ACCESS_TOKEN_SECRET>
 ```
 
 //end::ref-doc[]
