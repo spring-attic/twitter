@@ -16,7 +16,6 @@
 
 package org.springframework.cloud.stream.app.twitterstream.source;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
@@ -28,9 +27,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.client.ClientHttpRequest;
 import org.springframework.http.client.ClientHttpRequestFactory;
-import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.integration.endpoint.MessageProducerSupport;
@@ -39,7 +36,6 @@ import org.springframework.social.twitter.api.impl.TwitterTemplate;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.HttpStatusCodeException;
-import org.springframework.web.client.RequestCallback;
 import org.springframework.web.client.ResponseExtractor;
 import org.springframework.web.client.RestTemplate;
 
@@ -50,6 +46,7 @@ import org.springframework.web.client.RestTemplate;
  * @author David Turanski
  * @author Gary Russell
  * @author Artem Bilan
+ * @author Christian Tzolov
  */
 //TODO: Move this class to a common twitter support subproject
 public abstract class AbstractTwitterInboundChannelAdapter extends MessageProducerSupport {
@@ -170,39 +167,32 @@ public abstract class AbstractTwitterInboundChannelAdapter extends MessageProduc
 		}
 
 		private void readStream(RestTemplate restTemplate) {
-			restTemplate.execute(buildUri(), HttpMethod.GET, new RequestCallback() {
-
-				@Override
-				public void doWithRequest(ClientHttpRequest request) throws IOException {
-				}
-			},
-					new ResponseExtractor<String>() {
-
-						@Override
-						public String extractData(ClientHttpResponse response) throws IOException {
-							InputStream inputStream = response.getBody();
-							LineNumberReader reader = null;
-							try {
-								reader = new LineNumberReader(new InputStreamReader(inputStream));
-								resetBackOffs();
-								while (running.get()) {
-									String line = reader.readLine();
-									if (!StringUtils.hasText(line)) {
-										break;
-									}
+			restTemplate.execute(buildUri(), HttpMethod.GET,
+					request -> {
+					},
+					(ResponseExtractor<String>) response -> {
+						InputStream inputStream = response.getBody();
+						LineNumberReader reader = null;
+						try {
+							reader = new LineNumberReader(new InputStreamReader(inputStream));
+							resetBackOffs();
+							while (running.get()) {
+								String line = reader.readLine();
+								if (StringUtils.hasText(line)) {
+									// no text means keep-alive message
 									doSendLine(line);
 								}
 							}
-							finally {
-								if (reader != null) {
-									reader.close();
-								}
-							}
-
-							return null;
 						}
+						finally {
+							if (reader != null) {
+								reader.close();
+							}
+						}
+
+						return null;
 					}
-					);
+			);
 		}
 	}
 
