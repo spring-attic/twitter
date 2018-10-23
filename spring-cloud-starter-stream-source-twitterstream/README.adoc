@@ -1,9 +1,14 @@
 //tag::ref-doc[]
 = Twitter Stream Source
 
-This source ingests data from Twitter's https://dev.twitter.com/docs/streaming-apis/streams/public[streaming API v1.1]. It uses the https://dev.twitter.com/docs/streaming-apis/streams/public[sample and filter] stream endpoints rather than the full "firehose" which needs special access. The endpoint used will depend on the parameters you supply in the stream definition (some are specific to the filter endpoint).
+This source ingests data from Twitter's https://developer.twitter.com/en/docs/tutorials/consuming-streaming-data[streaming API].
+It uses the https://developer.twitter.com/en/docs/tweets/sample-realtime/overview/GET_statuse_sample[sample] and
+https://developer.twitter.com/en/docs/tweets/filter-realtime/overview[filter] stream endpoints rather than the full
+"firehose" which needs special access. The endpoint used will depend on the parameters you supply in the stream
+definition (some are specific to the filter endpoint).
 
-You need to supply all keys and secrets (both consumer and accessToken) to authenticate for this source, so it is easiest if you just add these as the following environment variables: CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN and ACCESS_TOKEN_SECRET.
+You need to supply all keys and secrets (both consumer and accessToken) to authenticate for this source, so it is easiest
+if you just add these as the following environment variables: CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN and ACCESS_TOKEN_SECRET.
 
 == Input
 
