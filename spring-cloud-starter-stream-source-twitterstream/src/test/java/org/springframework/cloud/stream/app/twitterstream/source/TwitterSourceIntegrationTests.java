@@ -33,6 +33,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.cloud.stream.test.binder.MessageCollector;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.messaging.Message;
@@ -73,6 +74,7 @@ public abstract class TwitterSourceIntegrationTests {
 	@Autowired
 	protected AtomicReference<URI> uri;
 
+	@SpringBootTest({ "spring.main.allow-bean-definition-overriding=true" })
 	public static class DefaultPropertiesTests extends TwitterSourceIntegrationTests {
 
 		@Test
@@ -85,7 +87,8 @@ public abstract class TwitterSourceIntegrationTests {
 
 	}
 
-	@SpringBootTest({ "twitter.stream.streamType=FIREHOSE", "twitter.stream.language=english" })
+	@SpringBootTest({ "twitter.stream.streamType=FIREHOSE", "twitter.stream.language=english",
+			"spring.main.allow-bean-definition-overriding=true" })
 	public static class FireHoseTests extends TwitterSourceIntegrationTests {
 
 		@Test
