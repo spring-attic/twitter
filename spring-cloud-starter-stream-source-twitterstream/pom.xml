@@ -58,6 +58,11 @@
 							<extraTestConfigClass>org.springframework.cloud.stream.app.test.twitter.TwitterTestConfiguration.class</extraTestConfigClass>
 						</twitterstream-source>
 					</generatedApps>
+					<enableContainerImageMetadata>true</enableContainerImageMetadata>
+					<metadataSourceTypeFilters>
+						<filter>org.springframework.cloud.stream.app.twitter.TwitterCredentials</filter>
+						<filter>org.springframework.cloud.stream.app.twitterstream.source.TwitterStreamProperties</filter>
+					</metadataSourceTypeFilters>
 				</configuration>
 			</plugin>
 		</plugins>
